@@ -30,4 +30,4 @@ jobs:
             cd ~/abrikozru # Перейти в директорию вашего приложения
             git pull # Скачать последние изменения
             docker compose down
-            docker-compose up -d
+            docker-compose up --build  -d

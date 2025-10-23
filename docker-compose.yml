@@ -1,0 +1,36 @@
+services:
+  nuxt_app:
+    environment:
+      PORT: $PORT
+    build:
+      context: .
+      args:
+        MONGODB_URI: mongodb://mongo:27017/abrikozru
+    ports:
+      - "5000:$PORT"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  mongo:
+    image: mongo
+    command: mongod --quiet --logpath /dev/null
+    logging:
+      driver: none
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27018:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 }).ok"] # Recommended for newer MongoDB versions
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  default:
+
+
+volumes:
+  mongo_data:
