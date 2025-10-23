@@ -1,0 +1,33 @@
+name: Deploy toVPS
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+  deploy:
+    runs-on: ubuntu-latest
+    #    needs: build
+
+    steps:
+      - name: Deploy to server # Шаг развертывания на сервер
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/skypro-course-5 # Перейти в директорию вашего приложения
+            git pull # Скачать последние изменения
+            docker compose down
+            docker-compose up -d
