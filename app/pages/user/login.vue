@@ -4,7 +4,7 @@ import {useCustomStore} from '~/store/custom-store';
 const {loggedUser, authenticateUser} = useCustomStore()
 const config = useRuntimeConfig()
 
-const user = ref({email: '', password: ''})
+const user = ref(config.app.buildId==='dev' ? {email: 'abrikoz@gmail.com', password: '1'}:{email: '', password: ''})
 
 async function submit() {
   await authenticateUser(user.value)
