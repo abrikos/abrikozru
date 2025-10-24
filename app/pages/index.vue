@@ -4,7 +4,7 @@
 
 <template lang="pug">
   div index
-    router-link(to="/blog") Blog
+    router-link(to="/blog") Blog22
 </template>
 
 <style scoped>
