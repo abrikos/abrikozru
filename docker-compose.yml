@@ -1,11 +1,13 @@
 services:
   nuxt_app:
+    environment:
+      PORT: $PORT
     build:
       context: .
       args:
         MONGODB_URI: mongodb://mongo:27017/abrikozru
     ports:
-      - "5000:3000"
+      - "5000:$PORT"
     depends_on:
       mongo:
         condition: service_healthy

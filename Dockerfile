@@ -6,7 +6,7 @@ WORKDIR /app
 RUN corepack enable
 
 # Copy package.json and lockfile (e.g., pnpm-lock.yaml)
-COPY package.json ./
+COPY package.json yarn.lock ./
 
 # Install dependencies
 RUN yarn

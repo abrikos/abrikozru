@@ -1,3 +1,15 @@
+# Prepare deploy
+run on server
+```shell
+ssh-keygen -t rsa -b 4096 -C "git@github.com:abrikos/${REPO_NAME}.git" -f ~/.ssh/${REPO_NAME}_deploy_key -N ""
+```
+```shell
+cat ~/.ssh/${REPO_NAME}_deploy_key.pub >> ~/.ssh/authorized_keys 
+```
+```shell
+cat ~/.ssh/${REPO_NAME}_deploy_key 
+```
+Copy last output into github Actions variable SSH_KEY
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
