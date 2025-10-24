@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {IUser} from "~/server/models/user.model";
+import {IUser} from "~~/server/models/user.model";
 import moment from "moment";
 
 const model = 'token'

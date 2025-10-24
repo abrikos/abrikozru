@@ -20,7 +20,7 @@ router.post('/request-restore-password', defineEventHandler(async (event) => {
         to: email,
         subject: 'Восстановить пароль',
         text: `Ссылка для восстановления ${link}`
-    })
+    })as {messageId:string}
     if (!res.messageId) throw createError({statusCode: 500, message: 'Ошибка отправки'})
     return {message: 'Новый пароль отправлен на почту'}
 }))
@@ -79,8 +79,8 @@ router.post('/registration', defineEventHandler(async (event) => {
         to: body.email,
         subject: 'Подтверждение регистрации',
         text: `Для подтверждения введите код ${body.restorePassword} \n Или пройдите по ссылке ${link}`
-    })
-    if (res.message) throw createError({statusCode: 503, message: 'Ошибка отправки e-mail'})
+    }) as {message:string}
+    if (res?.message) throw createError({statusCode: 503, message: 'Ошибка отправки e-mail'})
     await User.create(body)
     return 200
 }))

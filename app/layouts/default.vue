@@ -13,6 +13,7 @@ const leftDrawerOpen = ref(true);
 const pages = ref()
 
 const pagesAdmin = [
+  {to: '/admin/add-post', label: 'Add post', icon: 'mdi-text-account'},
   {to: '/admin/user-list', label: 'Список пользователей', icon: 'mdi-text-account'},
 ]
 const version = ref()
