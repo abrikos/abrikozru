@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import moment from "moment";
 
-const model = 'blog'
+const model = 'post'
 
-export interface IBlog extends mongoose.Document {
+export interface IPost extends mongoose.Document {
     title: string;
     text: string;
     user: IUser
@@ -29,4 +29,4 @@ schema.virtual('date')
         return moment(this.createdAt).format('YYYY-MM-DD HH:mm');
     })
 
-export const BlogModel = mongoose.model<IToken, TokenModel>(model, schema)
+export const PostModel = mongoose.model<IToken, TokenModel>(model, schema)

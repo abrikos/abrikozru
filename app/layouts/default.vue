@@ -12,6 +12,9 @@ const drawerSide = useCookie<string>('drawerSide');
 const leftDrawerOpen = ref(true);
 const pages = ref()
 
+const pagesUser = [
+  {to: '/', label: 'Начало', icon: 'mdi-text-account'},
+]
 const pagesAdmin = [
   {to: '/admin/add-post', label: 'Add post', icon: 'mdi-text-account'},
   {to: '/admin/user-list', label: 'Список пользователей', icon: 'mdi-text-account'},
@@ -41,6 +44,7 @@ async function clearBase(){
       q-toolbar
         q-toolbar-title.cursor-pointer(@click="navigateTo('/')") Blog abrikos
         q-space
+        //q-btn(v-for="page in pagesUser" :to="page.to" :label="page.label")
         q-btn(v-for="page in pagesAdmin" :to="page.to" :label="page.label" v-if="loggedUser?.isAdmin")
         q-space
         q-btn.flex.la-align-center(flat dense no-caps v-if="loggedUser" to="/user/cabinet") {{loggedUser.email}}

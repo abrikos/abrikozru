@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const posts = ref([])
 async function load() {
-  posts.value = await useNuxtApp().$GET('/blog/posts') as never[]
+  posts.value = await useNuxtApp().$GET('/blog/posts')
 }
-onMounted(load)
+onMounted(posts)
 </script>
 
 <template lang="pug">
-  div  {{ posts }}
+div  {{ posts }}
 </template>
 
 <style scoped>
