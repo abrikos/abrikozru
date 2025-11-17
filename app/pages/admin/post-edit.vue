@@ -8,9 +8,15 @@ $listen('picture:insert', (html: string) => {
 $listen('dialog:close', () => {
   showUpload.value = false
 })
+const route = useRoute()
+async function load(){
+  editor.value = await useNuxtApp().$GET(`/blog/post/${route.query.id}`)
+}
+onMounted(load)
+
 const editor = ref({title: '', text: ''})
 const images = ref([])
-const showUpload = ref(true)
+const showUpload = ref(false)
 const actions = {
   upload: {
     tip: 'add image',

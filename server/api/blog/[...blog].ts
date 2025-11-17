@@ -1,13 +1,15 @@
 import moment from "moment";
+import mongoose from "mongoose";
 import fs from "fs";
 
 const router = createRouter()
 
 router.get('/posts', defineEventHandler(async () => {
-    return PostModel.find()
+    return PostModel.find().sort({createdAt: -1});
 }))
 router.get('/post/:id', defineEventHandler(async (event) => {
     const {id} = event.context.params as Record<string, string>
+    if(!mongoose.isValidObjectId(id)) throw createError({statusCode: 404, message: 'Post not found',})
     return PostModel.findById(id)
 }))
 
@@ -15,9 +17,12 @@ router.post('/post/save', defineEventHandler(async (event) => {
     const user = event.context.user
     if (!user?.isAdmin) throw createError({statusCode: 403, message: 'Доступ запрещён',})
     const body = await readBody(event)
-    const x = await PostModel.findOneAndUpdate({_id:body.id}, body,{upsert: true})
-    console.log(x)
-    return x
+    if(body.id) {
+        return  PostModel.findOneAndUpdate({_id: body.id}, body, {upsert: true})
+    }else{
+        return PostModel.create(body)
+    }
+
 }))
 
 router.post('/upload', defineEventHandler(async (event) => {

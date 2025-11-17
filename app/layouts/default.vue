@@ -16,7 +16,7 @@ const pagesUser = [
   {to: '/', label: 'Начало', icon: 'mdi-text-account'},
 ]
 const pagesAdmin = [
-  {to: '/admin/add-post', label: 'Add post', icon: 'mdi-text-account'},
+  {to: '/admin/post-edit', label: 'Add post', icon: 'mdi-text-account'},
   {to: '/admin/user-list', label: 'Список пользователей', icon: 'mdi-text-account'},
 ]
 const version = ref()

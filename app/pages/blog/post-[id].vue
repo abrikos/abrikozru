@@ -14,7 +14,7 @@ onMounted(load)
 <template lang="pug">
   div(v-if='post')
     h1 {{ post.title }}
-      q-btn(icon="mdi-pencil" v-if="loggedUser?.isAdmin")
+      q-btn(:to="{path:'/admin/post-edit', query:{id:post.id}}" icon="mdi-pencil" v-if="loggedUser?.isAdmin")
     div(v-html="post.text")
 </template>
 

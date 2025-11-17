@@ -16,9 +16,9 @@ const schema = new Schema({
     title: {type: String},
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
     text: {type: String},
-    createdAt: {type: Number, default: 0},
 }, {
     toObject: {virtuals: true},
+    timestamps: {createdAt: 'createdAt'},
     // use if your results might be retrieved as JSON
     // see http://stackoverflow.com/q/13133911/488666
     toJSON: {virtuals: true}
